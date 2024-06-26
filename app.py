@@ -42,3 +42,11 @@ def read_csv(file, schemas) -> pd.DataFrame:
     columns = get_column_names(schemas, ds_name)
     return pd.read_csv(file, names=columns)
 
+def to_json(df, tgt_base_dir, ds_name, file_name):
+    json_file_path = f'{tgt_base_dir}/{ds_name}/{file_name}'
+    os.makedirs(f'{tgt_base_dir}/{ds_name}', exist_ok=True)
+    df.to_json(
+        json_file_path,
+        orient='records',
+        lines=True
+    )
